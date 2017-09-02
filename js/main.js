@@ -1,13 +1,14 @@
 var webpageControl = {
   pages: ['home', 'media', 'projects', 'about'],
-  currentPage: '',
-  home: {},
-  media: {
-    photoSlides: '',
-    lastPhoto: 0
-  },
-  projects: {},
-  about: {}
+  currentPage: ''
+  // ,
+  // home: {},
+  // media: {
+  //   photoSlides: '',
+  //   lastPhoto: 0
+  // },
+  // projects: {},
+  // about: {}
 }
 
 // var information = {
@@ -54,9 +55,9 @@ var setCurrentPage = function(page) {
 //   // setCurrentPage('home')
 // }
 
-var createMediaPage = function() {
-
-}
+// var createMediaPage = function() {
+//
+// }
 
 var createProjectsPage = function() {}
 

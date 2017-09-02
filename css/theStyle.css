@@ -77,10 +77,6 @@ a:hover {
     color: white;
 }
 
-.navigation-button a {
-  text-transform: capitalize;
-}
-
 /* classes */
 
 .quarter {width: 25%;}
@@ -132,8 +128,10 @@ a:hover {
     border-right: 1px solid gray;
 }
 
-.main-container {
+.profile-container {
     margin-top: 40px;
+    width: 100%;
+    height: 100%;
 }
 
 #container {
