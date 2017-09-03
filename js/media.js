@@ -17,8 +17,9 @@ var createMediaVideos = function() {
   for(let i in videosArray) {
     var $videoDiv = $('<div class="col-6 col-m-6 video-div">').appendTo($videoRow);
     var $video = $(`<iframe width="1280" height="720" class="video" src="${videosArray[i].url}" frameborder="0" allowfullscreen>`).appendTo($videoDiv);
-    console.log(videosArray[i].name);
-    console.log(videosArray[i].url);
+    mediaResize();
+    // console.log(videosArray[i].name);
+    // console.log(videosArray[i].url);
   }
 }
 
@@ -28,6 +29,15 @@ var createMediaPage = function() {
   mediaInformation.photoSlides = $('.photoSlide');
   displayViewer();
   navigate();
+}
+
+function mediaResize() {
+  // if the window width is greater than 1000px make sure that video width does not exceed 500px
+  var videoCellWidth = $(window).width() < 1000 ? $(window).width() / 2 : 500;
+  // if the window width is less than 600px make video width 100% of the window
+  videoCellWidth = $(window).width() > 600 ? videoCellWidth : $(window).width();
+  $('.video-div').css('width', `${videoCellWidth}px`).css('height', `${videoCellWidth * 9 / 16}`);
+  $('iframe').css('width', '100%').css('height', '100%');
 }
 
 var displayViewer = function(number) {

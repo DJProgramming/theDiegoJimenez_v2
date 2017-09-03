@@ -86,8 +86,14 @@ var changeContnet = function(page) {
   }
 }
 
+function resize() {
+  mediaResize();
+}
+
 var run = function() {
   createLayout();
+
+  $(window).on('resize', resize);
 }
 
 $(function() {
