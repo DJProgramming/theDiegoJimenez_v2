@@ -23,6 +23,11 @@ var createMediaVideos = function() {
   }
 }
 
+var createMediaPhotos = function() {
+  var $photos = $('<div class="row photos">').appendTo($('.main-container'));
+  var $photoRow = $('<div class="col-12 photo-row">').appendTo($photos);
+}
+
 var createMediaPage = function() {
   createMediaNavigation();
   createMediaVideos();
@@ -41,7 +46,6 @@ function mediaResize() {
 }
 
 var displayViewer = function(number) {
-
   $(".photoRow .photo").click(function() {          // show viewer
     $(".viewer").show();
     displayPhoto(number);
