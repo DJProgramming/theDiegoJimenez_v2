@@ -26,12 +26,35 @@ var createMediaVideos = function() {
 var createMediaPhotos = function() {
   var $photos = $('<div class="row photos">').appendTo($('.main-container'));
   var $photoRow = $('<div class="col-12 photo-row">').appendTo($photos);
+  for(let i in photosArray) {
+    var $photoDiv = $('<div class="col-4 col-m-4 photo-div">').appendTo($photoRow);
+    var $photo = $(`<img class="photo" id="photo-${i}" src="${photosArray[i].url}">`).appendTo($photoDiv);
+
+    // var number = Number(this.id.split('-')[1]);
+
+    $photo.on('click', displayViewer);
+  }
+}
+
+function createMediaViewer() {
+  var $viewer = $('<div class="viewer viewer-m">').appendTo($('.main-container'));
+  var $close = $('<div class="close">close</div>').appendTo($viewer);
+  var $mediaViewer = $('<div class="photo-viewer-box">').appendTo($viewer);
+  var $navButtons = $('<div class="media-nav-buttons">').appendTo($mediaViewer);
+  var $previous = $('<button class="previous media-nav-button"><</button>').appendTo($navButtons);
+  var $next = $('<button class="next media-nav-button">></button>').appendTo($navButtons);
+  for(let i in photosArray) {
+    var $photoSlide = $('<div class="photo-slide">').appendTo($mediaViewer);
+    var $photo = $(`<img class="photo" src="${photosArray[i].url}">`).appendTo($photoSlide);
+  }
 }
 
 var createMediaPage = function() {
   createMediaNavigation();
   createMediaVideos();
-  mediaInformation.photoSlides = $('.photoSlide');
+  createMediaPhotos();
+  createMediaViewer();
+  mediaInformation.photoSlides = $('.photo-slide');
   displayViewer();
   navigate();
 }
@@ -45,10 +68,11 @@ function mediaResize() {
   $('iframe').css('width', '100%').css('height', '100%');
 }
 
-var displayViewer = function(number) {
-  $(".photoRow .photo").click(function() {          // show viewer
+var displayViewer = function() {
+  $(".photo-row .photo").click(function() {          // show viewer
     $(".viewer").show();
-    displayPhoto(number);
+    // var number = Number(this.id.split('-')[1]);
+    displayPhoto(Number(this.id.split('-')[1]));
   });
   $(".close").click(function() {          // hide viewer
     $(".viewer").hide();
@@ -56,6 +80,7 @@ var displayViewer = function(number) {
 }
 
 var displayPhoto = function(number) {
+  console.log('display photo');
   $(mediaInformation.photoSlides[mediaInformation.lastPhoto]).hide();
   $(mediaInformation.photoSlides[number]).show();
   mediaInformation.lastPhoto = number;
@@ -75,6 +100,7 @@ var displayPhoto = function(number) {
 // navigate to next or previous photo
 var navigate = function() {
   $(".next").click(function() {
+    console.log('clicked');
     if(mediaInformation.lastPhoto+1 < mediaInformation.photoSlides.length)  // make sure there is a next photo
       displayPhoto(mediaInformation.lastPhoto+1);
   });

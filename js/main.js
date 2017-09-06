@@ -1,19 +1,7 @@
 var webpageControl = {
   pages: ['home', 'media', 'projects', 'about'],
   currentPage: ''
-  // ,
-  // home: {},
-  // media: {
-  //   photoSlides: '',
-  //   lastPhoto: 0
-  // },
-  // projects: {},
-  // about: {}
 }
-
-// var information = {
-//   profileInformation: 'Software Engineer at Capital One<br>BS in Technology & Information Management<br>Minor in Computer Science'
-// }
 
 var createNavigationBar = function() {
   var $header = $('<header>').appendTo('body');
@@ -45,20 +33,6 @@ var setCurrentPage = function(page) {
   }
 }
 
-// var createHomePage = function() {
-//   var $profileImageContainer = $('<div class="col-12 col-m-12" id="profile-image-container">').appendTo($('.main-container'));
-//   var $profileImage = $('<img class="photo", id="profile-image" src="./images/profile.jpg">').appendTo($profileImageContainer);
-//   var $profileInfoContainer = $('<div class="col-12 col-m-12" id="profile-info-container">').appendTo($('.main-container'));
-//   var $profileInfo = $(`<div class="info" id="about-info"><i>${information.profileInformation}</i></div>`).appendTo($profileInfoContainer);
-//   setCurrentPage('home');
-//   console.log(webpageControl.currentPage);
-//   // setCurrentPage('home')
-// }
-
-// var createMediaPage = function() {
-//
-// }
-
 var createProjectsPage = function() {}
 
 var createAboutPage = function() {}
@@ -78,7 +52,7 @@ var changeContnet = function(page) {
     // capitalize first letter of each label
     var label = page[0].toUpperCase();
     for(var letter = 1; letter < page.length; letter++) { label += page[letter]; }
-
+    // run corresponding create page function
     eval(`create${label}Page()`);
 
     // set new current page
