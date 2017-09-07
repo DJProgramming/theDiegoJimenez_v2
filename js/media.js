@@ -6,9 +6,9 @@ var mediaInformation = {
 var createMediaNavigation = function() {
   var $mediaNavigation = $('<div class="row media-navigation">').appendTo($('.main-container'));
   var $buttonRow = $('<div class="col-12 button-row">').appendTo($mediaNavigation);
-  var $mediaToggle = $('<div class="col-4 col-m-4 media-nav-button" id="media-toggle">All</div>').appendTo($buttonRow);
-  var $videoToggle = $('<div class="col-4 col-m-4 media-nav-button" id="video-toggle">Video</div>').appendTo($buttonRow);
-  var $photoToggle = $('<div class="col-4 col-m-4 media-nav-button" id="photo-toggle">Photo</div>').appendTo($buttonRow);
+  var $mediaToggle = $('<div class="col-4 col-m-4 media-display-button" id="media-toggle">All</div>').appendTo($buttonRow);
+  var $videoToggle = $('<div class="col-4 col-m-4 media-display-button" id="video-toggle">Video</div>').appendTo($buttonRow);
+  var $photoToggle = $('<div class="col-4 col-m-4 media-display-button" id="photo-toggle">Photo</div>').appendTo($buttonRow);
 }
 
 var createMediaVideos = function() {
@@ -26,9 +26,41 @@ var createMediaVideos = function() {
 var createMediaPhotos = function() {
   var $photos = $('<div class="row photos">').appendTo($('.main-container'));
   var $photoRow = $('<div class="col-12 photo-row">').appendTo($photos);
+
+  var photoRowHeight = 0;
+  var largerPhotoInRow = false;
+
   for(let i in photosArray) {
-    var $photoDiv = $('<div class="col-4 col-m-4 photo-div">').appendTo($photoRow);
+
+    // if(i%3 === 0 && photoRowHeight !== 0) {
+    //   photoRowHeight = $photoDiv.css('height');
+    //   console.log(photoRowHeight);
+    // }
+
+    // var $photoDiv = $(`<div class="col-4 col-m-4 photo-div" id="photo-div-${i}">`).css('display', 'flex').css('alignItems', 'center').appendTo($photoRow);
+    var $photoDiv = photoRowHeight === 0 ? $('<div class="col-4 col-m-4 photo-div">').appendTo($photoRow) : $('<div class="col-4 col-m-4 photo-div">').css('height', photoRowHeight).css('display', 'flex').css('alignItems', 'center').appendTo($photoRow);
     var $photo = $(`<img class="photo" id="photo-${i}" src="${photosArray[i].url}">`).appendTo($photoDiv);
+
+    if(i%3 === 0) {
+      photoRowHeight = $photoDiv.css('height');
+      largerPhotoInRow = false;
+      // console.log(photoRowHeight);
+    } else if($photoDiv.css('height') > photoRowHeight) {
+      console.log('larger');
+      photoRowHeight = $photoDiv.css('height');
+      largerPhotoInRow = true;
+    }
+    if(largerPhotoInRow && i%3 === 2) {
+      console.log(i);
+      console.log($(`#photo-div-${i}`).css('height'));
+      $(`#photo-div-${i}`).css('height', photoRowHeight);
+      $(`#photo-div-${i-1}`).css('height', photoRowHeight);
+      $(`#photo-div-${i-2}`).css('height', photoRowHeight);
+      // $('.photo-div')[i].css('height', photoRowHeight);
+      // $('.photo-div')[i-1].css('height', photoRowHeight);
+      // $('.photo-div')[i-2].css('height', photoRowHeight);
+    }
+
 
     // var number = Number(this.id.split('-')[1]);
 

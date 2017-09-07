@@ -37,7 +37,7 @@ body {
     align-items: center;
 }
 
-.audioRow {
+.audio-row {
     width: 100%;
     padding: 0;
     align-items: center;
@@ -77,7 +77,7 @@ button {
     border: none;
 }
 
-.nav-buttons {
+.media-nav-buttons {
     position: absolute;
     /*left: 5%;*/
     width: 90%;
@@ -86,14 +86,15 @@ button {
     left: 0;
     right: 0;
     margin: auto;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     z-index: 3;
 }
 
-.nav-button {
+.media-nav-button {
     font-size: 2em;
     color: white;
     background: black;
+    /*border: 1px solid white;*/
 }
 
 .close {
