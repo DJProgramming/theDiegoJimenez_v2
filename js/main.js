@@ -35,8 +35,6 @@ var setCurrentPage = function(page) {
 
 var createProjectsPage = function() {}
 
-var createAboutPage = function() {}
-
 var createLayout = function() {
   createNavigationBar();
   createMainContainer();

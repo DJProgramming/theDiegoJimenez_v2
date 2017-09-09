@@ -9,6 +9,25 @@ var createMediaNavigation = function() {
   var $mediaToggle = $('<div class="col-4 col-m-4 media-display-button" id="media-toggle">All</div>').appendTo($buttonRow);
   var $videoToggle = $('<div class="col-4 col-m-4 media-display-button" id="video-toggle">Video</div>').appendTo($buttonRow);
   var $photoToggle = $('<div class="col-4 col-m-4 media-display-button" id="photo-toggle">Photo</div>').appendTo($buttonRow);
+
+  $('.media-display-button').on('click', (button) => {
+    // button.target.id is the id of the clicked button
+    switch (button.target.id) {
+      case 'media-toggle':
+        if($('.videos').css('display') === 'none') $('.videos').slideDown(1000);
+        if($('.photos').css('display') === 'none') $('.photos').slideDown(1000);
+        break;
+      case 'video-toggle':
+        if($('.videos').css('display') === 'none') $('.videos').slideDown(1000);
+        if($('.photos').css('display') !== 'none') $('.photos').slideUp(1000);
+        break;
+      case 'photo-toggle':
+        if($('.videos').css('display') !== 'none') $('.videos').slideUp(1000);
+        if($('.photos').css('display') === 'none') $('.photos').slideDown(1000);
+        break;
+      default:
+    }
+  });
 }
 
 var createMediaVideos = function() {
@@ -17,55 +36,23 @@ var createMediaVideos = function() {
   for(let i in videosArray) {
     var $videoDiv = $('<div class="col-6 col-m-6 video-div">').appendTo($videoRow);
     var $video = $(`<iframe width="1280" height="720" class="video" src="${videosArray[i].url}" frameborder="0" allowfullscreen>`).appendTo($videoDiv);
-    mediaResize();
-    // console.log(videosArray[i].name);
-    // console.log(videosArray[i].url);
+    // mediaResize();
   }
+  mediaResize();
 }
 
 var createMediaPhotos = function() {
   var $photos = $('<div class="row photos">').appendTo($('.main-container'));
-  var $photoRow = $('<div class="col-12 photo-row">').appendTo($photos);
-
-  var photoRowHeight = 0;
-  var largerPhotoInRow = false;
 
   for(let i in photosArray) {
+    if(i%3 === 0) var $photoRow = $('<div class="col-12 photo-row">').css('display', 'flex').appendTo($photos);
 
-    // if(i%3 === 0 && photoRowHeight !== 0) {
-    //   photoRowHeight = $photoDiv.css('height');
-    //   console.log(photoRowHeight);
-    // }
-
-    // var $photoDiv = $(`<div class="col-4 col-m-4 photo-div" id="photo-div-${i}">`).css('display', 'flex').css('alignItems', 'center').appendTo($photoRow);
-    var $photoDiv = photoRowHeight === 0 ? $('<div class="col-4 col-m-4 photo-div">').appendTo($photoRow) : $('<div class="col-4 col-m-4 photo-div">').css('height', photoRowHeight).css('display', 'flex').css('alignItems', 'center').appendTo($photoRow);
+    var $photoDiv = $(`<div class="col-4 col-m-4 photo-div" id="photo-div-${i}">`).appendTo($photoRow);
     var $photo = $(`<img class="photo" id="photo-${i}" src="${photosArray[i].url}">`).appendTo($photoDiv);
-
-    if(i%3 === 0) {
-      photoRowHeight = $photoDiv.css('height');
-      largerPhotoInRow = false;
-      // console.log(photoRowHeight);
-    } else if($photoDiv.css('height') > photoRowHeight) {
-      console.log('larger');
-      photoRowHeight = $photoDiv.css('height');
-      largerPhotoInRow = true;
-    }
-    if(largerPhotoInRow && i%3 === 2) {
-      console.log(i);
-      console.log($(`#photo-div-${i}`).css('height'));
-      $(`#photo-div-${i}`).css('height', photoRowHeight);
-      $(`#photo-div-${i-1}`).css('height', photoRowHeight);
-      $(`#photo-div-${i-2}`).css('height', photoRowHeight);
-      // $('.photo-div')[i].css('height', photoRowHeight);
-      // $('.photo-div')[i-1].css('height', photoRowHeight);
-      // $('.photo-div')[i-2].css('height', photoRowHeight);
-    }
-
-
-    // var number = Number(this.id.split('-')[1]);
 
     $photo.on('click', displayViewer);
   }
+  mediaResize();
 }
 
 function createMediaViewer() {
@@ -98,6 +85,10 @@ function mediaResize() {
   videoCellWidth = $(window).width() > 600 ? videoCellWidth : $(window).width();
   $('.video-div').css('width', `${videoCellWidth}px`).css('height', `${videoCellWidth * 9 / 16}`);
   $('iframe').css('width', '100%').css('height', '100%');
+
+  if($(window).width() < 600) {
+    $('.photo-row').css('display', 'inline');
+  }
 }
 
 var displayViewer = function() {
