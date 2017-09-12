@@ -3,6 +3,10 @@ var webpageControl = {
   currentPage: ''
 }
 
+function changeTitle(title) {
+  $('head title').text(`${title} | Diego Jimenez`);
+}
+
 var createNavigationBar = function() {
   var $header = $('<header>').appendTo('body');
   var $topBanner = $('<div class="top-banner">').appendTo($header);
@@ -32,8 +36,6 @@ var setCurrentPage = function(page) {
     webpageControl.currentPage = i === page ? page : webpageControl.currentPage;
   }
 }
-
-var createProjectsPage = function() {}
 
 var createLayout = function() {
   createNavigationBar();

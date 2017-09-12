@@ -69,6 +69,7 @@ function createMediaViewer() {
 }
 
 var createMediaPage = function() {
+  changeTitle('Media');
   createMediaNavigation();
   createMediaVideos();
   createMediaPhotos();

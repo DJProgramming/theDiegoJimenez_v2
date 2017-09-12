@@ -3,6 +3,7 @@ var homeInformation = {
 }
 
 var createHomePage = function() {
+  changeTitle('Home');
   var $profileContainer = $('<div class="col-12 col-m-12 profile-container">').appendTo($('.main-container'));
   var $profileImageContainer = $('<div class="col-12 col-m-12 profile-image-container" id="profile-image-container">').appendTo($profileContainer);
   var $profileImage = $('<img class="photo", id="profile-image" src="./images/profile.jpg">').appendTo($profileImageContainer);

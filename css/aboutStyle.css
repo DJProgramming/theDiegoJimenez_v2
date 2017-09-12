@@ -1,20 +1,24 @@
-#aboutPhoto {
+#about-photo {
     border: 4px solid white;
     border-radius: 10px;
 }
-#aboutPhoto:hover {
+#about-photo:hover {
     opacity: 1;
 }
 
-#personalInfo {
+#personal-info {
     padding: 15px 0;
     /*border: 1px solid white;*/
     color: white;
 }
 
-#personalInfo a {
+#personal-info a {
     color: white;
 }
-#personalInfo a:hover {
+#personal-info a:hover {
     color: var(--evilDarkGray);
+}
+
+.about-container {
+  color: white;
 }
