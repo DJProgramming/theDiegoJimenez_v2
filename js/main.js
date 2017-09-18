@@ -7,12 +7,20 @@ function changeTitle(title) {
   $('head title').text(`${title} | Diego Jimenez`);
 }
 
+function createMenuButton(locationToAppend) {
+  var $hamburger = $('<div class="hamburger">').appendTo($(`.${locationToAppend}`));
+  for(let i = 1; i <= 3; i++) {
+    var $bar = $(`<div class="bar${i}">`).appendTo($hamburger);
+  }
+}
+
 var createNavigationBar = function() {
   var $header = $('<header>').appendTo('body');
   var $topBanner = $('<div class="top-banner">').appendTo($header);
   var $navBar = $('<nav class="row">').appendTo($header);
   var $menuBar = $('<div class="col-12 menu-bar">').appendTo($navBar);
-  var $menuIcon = $('<img class="menu-icon" id="menu" src="images/icons/menu.png" />').appendTo($menuBar);
+  // var $menuIcon = $('<img class="menu-icon" id="menu" src="images/icons/menu.png" />').appendTo($menuBar);
+  createMenuButton('menu-bar');
   var $navigationButtons = $('<ul class="navigation-buttons" id="navigation">').appendTo($menuBar);
   for(let i of webpageControl.pages) {
     // $(`<li id="${i}"><b><a href="#">${i.toUpperCase()}</a></b></li>`).appendTo($navigationButtons);
@@ -21,6 +29,10 @@ var createNavigationBar = function() {
     $(`<li id="${i}"><b><a class="navigation-button" href="#">${label}</a></b></li>`).appendTo($navigationButtons);
     $(`#${i}`).on('click', () => { changeContnet(i)})
   }
+  $('.hamburger').on('click', function() {
+    this.classList.toggle("change");
+    $('#navigation').fadeToggle('300');
+  })
 }
 
 var createMainContainer = function() {
