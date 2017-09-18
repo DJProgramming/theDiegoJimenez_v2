@@ -102,6 +102,7 @@ a:hover {
 .menu-bar {
 	height: 50px;
 	display: flex;
+  align-items: center;
   border-bottom: 1px solid white;
   background: -webkit-linear-gradient(to right, #bbbbbb, #bbbbbb, #bbbbbb, #efefef, #efefef, #efefef);
   background: -moz-linear-gradient(to right, #bbbbbb, #bbbbbb, #bbbbbb, #efefef, #efefef, #efefef);
@@ -191,7 +192,7 @@ a:hover {
 }
 
 .bar1, .bar2, .bar3 {
-  width: 35px;
+  width: 30px;
   height: 3px;
   background-color: black;
   margin: 6px 0;
@@ -199,7 +200,8 @@ a:hover {
 }
 
 .change .bar1 {
-  transform: rotate(-45deg) translate(-9px, 6px) ;
+  /*transform: rotate(-45deg) translate(-9px, 6px) ;*/
+  transform: rotate(-45deg) translate(-7px, 7px) ;
 }
 
 .change .bar2 {
@@ -207,7 +209,7 @@ a:hover {
 }
 
 .change .bar3 {
-  transform: rotate(45deg) translate(-8px, -8px) ;
+  transform: rotate(45deg) translate(-6px, -6px) ;
 }
 
 /* For mobile phones: */
